@@ -1,4 +1,17 @@
 return {
+  -- ------------------------------------------------------------------
+  -- NvChad ecosystem pinned to exact commits (same as lazy-lock.json).
+  -- Spec-level commits beat the lockfile, so accidental :Lazy update /
+  -- :NvChadUpdate cannot pull versions that require nvim >= 0.11
+  -- (breaks colorify/gitsigns on Debian's apt nvim 0.10).
+  -- To upgrade: bump these commits + lazy-lock.json together.
+  -- ------------------------------------------------------------------
+  { "NvChad/NvChad", branch = "v2.5", commit = "262f103d3cbe22da7f352c9e01306cf5a34fd8a1" },
+  { "NvChad/ui", branch = "v3.0", commit = "78c96eee08ad8eb73e39f7aeff8d978be40b3f91" },
+  { "NvChad/base46", branch = "v3.0", commit = "19023074b28ef5554909d27d934353603df256f0" },
+  { "NvChad/menu", branch = "main", commit = "7a0a4a2896b715c066cfbe320bdc048091874cc6" },
+  { "NvChad/minty", branch = "main", commit = "aafc9e8e0afe6bf57580858a2849578d8d8db9e0" },
+
   {
     "stevearc/conform.nvim",
     -- event = "BufWritePre", -- uncomment for format on save
