@@ -11,6 +11,9 @@ return {
   { "NvChad/base46", branch = "v3.0", commit = "19023074b28ef5554909d27d934353603df256f0" },
   { "NvChad/menu", branch = "main", commit = "7a0a4a2896b715c066cfbe320bdc048091874cc6" },
   { "NvChad/minty", branch = "main", commit = "aafc9e8e0afe6bf57580858a2849578d8d8db9e0" },
+  -- gitsigns: pinned to the last nvim-0.10-compatible version
+  -- (fd78092+ uses the vim.validate() positional API added in nvim 0.11)
+  { "lewis6991/gitsigns.nvim", commit = "9f3c6dd7868bcc116e9c1c1929ce063b978fa519" },
 
   {
     "stevearc/conform.nvim",
