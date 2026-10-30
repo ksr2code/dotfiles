@@ -8,14 +8,14 @@ return {
     -- opts = require "configs.conform",
   },
 
-  {
-    "FtVim/norminette-lint.nvim",
-    config = function()
-      require("norminette-lint").setup {
-        enable_on_start = false, -- Default to false to improve startup performance
-      }
-    end,
-  },
+  -- {
+  --   "FtVim/norminette-lint.nvim", -- requires: pip install norminette
+  --   config = function()
+  --     require("norminette-lint").setup {
+  --       enable_on_start = false, -- Default to false to improve startup performance
+  --     }
+  --   end,
+  -- },
 
   {
     "christoomey/vim-tmux-navigator",
@@ -49,10 +49,10 @@ return {
       ensure_installed = {
         "lua_ls",
         "stylua",
-        "clangd",
-        "clang-format",
-        "pyright",
-        "gopls",
+        -- "clangd", -- C/C++ LSP
+        -- "clang-format", -- C/C++ formatter
+        -- "pyright", -- Python LSP (needs node+npm)
+        -- "gopls", -- Go LSP
       },
     },
   },
@@ -63,15 +63,15 @@ return {
       ensure_installed = {
         "lua_ls",
         "stylua",
-        "clangd",
-        "clang-format",
-        "codelldb",
-        "pyright",
-        "goimports",
-        "golangci-lint",
-        "delve",
-        "gofumpt",
-        "goimports-reviser",
+        -- "clangd", -- C/C++ LSP
+        -- "clang-format", -- C/C++ formatter
+        -- "codelldb", -- DAP debugger (C/C++/Rust)
+        -- "pyright", -- Python LSP (needs node+npm)
+        -- "goimports", -- Go formatter
+        -- "golangci-lint", -- Go linter
+        -- "delve", -- Go DAP debugger
+        -- "gofumpt", -- Go formatter
+        -- "goimports-reviser", -- Go formatter
       },
     },
   },
@@ -91,14 +91,14 @@ return {
         "vimdoc",
         "html",
         "css",
-        "c",
-        "cpp",
-        "python",
-        "go",
-        "gomod",
-        "gosum",
-        "gotmpl",
-        "gowork",
+        -- "c",
+        -- "cpp",
+        -- "python",
+        -- "go",
+        -- "gomod",
+        -- "gosum",
+        -- "gotmpl",
+        -- "gowork",
         "sql",
       },
       highlight = {
@@ -122,101 +122,101 @@ return {
     end,
   },
 
-  {
-    "rcarriga/nvim-dap-ui",
-    event = "VeryLazy",
-    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
-    config = function()
-      require("dapui").setup()
-      local dap = require "dap"
-      local dapui = require "dapui"
-      dap.listeners.before.attach.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.launch.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated.dapui_config = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited.dapui_config = function()
-        dapui.close()
-      end
-    end,
-  },
+  -- {
+  --   "rcarriga/nvim-dap-ui",
+  --   event = "VeryLazy",
+  --   dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+  --   config = function()
+  --     require("dapui").setup()
+  --     local dap = require "dap"
+  --     local dapui = require "dapui"
+  --     dap.listeners.before.attach.dapui_config = function()
+  --       dapui.open()
+  --     end
+  --     dap.listeners.before.launch.dapui_config = function()
+  --       dapui.open()
+  --     end
+  --     dap.listeners.before.event_terminated.dapui_config = function()
+  --       dapui.close()
+  --     end
+  --     dap.listeners.before.event_exited.dapui_config = function()
+  --       dapui.close()
+  --     end
+  --   end,
+  -- },
 
-  {
-    "jay-babu/mason-nvim-dap.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "mfussenegger/nvim-dap",
-    },
-    opts = {
-      handlers = {
-        codelldb = function()
-          local dap = require "dap"
-          local mason_path = vim.fn.stdpath "data" .. "/mason/packages/codelldb/extension/"
+  -- {
+  --   "jay-babu/mason-nvim-dap.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     "williamboman/mason.nvim",
+  --     "mfussenegger/nvim-dap",
+  --   },
+  --   opts = {
+  --     handlers = {
+  --       codelldb = function()
+  --         local dap = require "dap"
+  --         local mason_path = vim.fn.stdpath "data" .. "/mason/packages/codelldb/extension/"
+  --
+  --         dap.adapters.codelldb = {
+  --           type = "server",
+  --           port = "${port}",
+  --           executable = {
+  --             command = mason_path .. "adapter/codelldb",
+  --             args = { "--port", "${port}" },
+  --           },
+  --         }
+  --
+  --         dap.configurations.cpp = {
+  --           {
+  --             name = "Launch file",
+  --             type = "codelldb",
+  --             request = "launch",
+  --             program = function()
+  --               return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+  --             end,
+  --             cwd = "${workspaceFolder}",
+  --             stopOnEntry = false,
+  --             args = {},
+  --           },
+  --         }
+  --
+  --         -- Link C and Rust to use the same config
+  --         dap.configurations.c = dap.configurations.cpp
+  --         dap.configurations.rust = dap.configurations.cpp
+  --       end,
+  --       -- 🐍 ADD THIS NEW HANDLER FOR PYTHON
+  --       python = function()
+  --         local dap_python = require "dap-python"
+  --         local mason_path = vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python"
+  --         dap_python.setup(mason_path)
+  --       end,
+  --     },
+  --   },
+  -- },
 
-          dap.adapters.codelldb = {
-            type = "server",
-            port = "${port}",
-            executable = {
-              command = mason_path .. "adapter/codelldb",
-              args = { "--port", "${port}" },
-            },
-          }
+  -- {
+  --   "mfussenegger/nvim-dap",
+  --   dependencies = {
+  --     "williamboman/mason.nvim",
+  --     "mfussenegger/nvim-dap-python",
+  --     "rcarriga/nvim-dap-ui",
+  --     "theHamsta/nvim-dap-virtual-text",
+  --   },
+  --   config = function()
+  --     -- enable virtual text globally
+  --     require("nvim-dap-virtual-text").setup {
+  --       commented = true, -- show inline variable values
+  --     }
+  --   end,
+  -- },
 
-          dap.configurations.cpp = {
-            {
-              name = "Launch file",
-              type = "codelldb",
-              request = "launch",
-              program = function()
-                return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-              end,
-              cwd = "${workspaceFolder}",
-              stopOnEntry = false,
-              args = {},
-            },
-          }
-
-          -- Link C and Rust to use the same config
-          dap.configurations.c = dap.configurations.cpp
-          dap.configurations.rust = dap.configurations.cpp
-        end,
-        -- 🐍 ADD THIS NEW HANDLER FOR PYTHON
-        python = function()
-          local dap_python = require "dap-python"
-          local mason_path = vim.fn.stdpath "data" .. "/mason/packages/debugpy/venv/bin/python"
-          dap_python.setup(mason_path)
-        end,
-      },
-    },
-  },
-
-  {
-    "mfussenegger/nvim-dap",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "mfussenegger/nvim-dap-python",
-      "rcarriga/nvim-dap-ui",
-      "theHamsta/nvim-dap-virtual-text",
-    },
-    config = function()
-      -- enable virtual text globally
-      require("nvim-dap-virtual-text").setup {
-        commented = true, -- show inline variable values
-      }
-    end,
-  },
-
-  {
-    "leoluz/nvim-dap-go",
-    ft = "go",
-    dependencies = "mfussenegger/nvim-dap",
-    opts = {}, -- auto-detects delve in Mason
-  },
+  -- {
+  --   "leoluz/nvim-dap-go",
+  --   ft = "go",
+  --   dependencies = "mfussenegger/nvim-dap",
+  --   opts = {}, -- auto-detects delve in Mason
+  -- },
 
   {
     "kevinhwang91/nvim-bqf",

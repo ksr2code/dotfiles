@@ -36,13 +36,13 @@ map("t", "<Esc>", "<Cmd>stopinsert<CR>", {
 })
 
 --Norminette linter/autoformat
-map("n", "<leader>kc", function()
-  require("norminette-lint").toggle()
-  vim.notify "Toggled Norminette linting"
-end, { desc = "Toggle Norminette Linter" })
+-- map("n", "<leader>kc", function() -- requires: norminette-lint.nvim plugin + pip install norminette
+--   require("norminette-lint").toggle()
+--   vim.notify "Toggled Norminette linting"
+-- end, { desc = "Toggle Norminette Linter" })
 map({ "n", "v" }, "<leader>kf", function()
   require("conform").format { async = true }
-end, { desc = "Format file with Norminette/autopep8 formatter" })
+end, { desc = "Format file" })
 -- Lint (filetype-aware: flake8 for python, golangci-lint for go)
 map("n", "<leader>kl", function()
   local ft = vim.bo.filetype
@@ -59,28 +59,28 @@ end, {
   desc = "Add Python shebang",
 })
 
--- Debug
-map("n", "<leader>du", function()
-  require("dapui").toggle()
-end, { desc = "Toggle Debug UI" })
-map("n", "<leader>db", function()
-  require("dap").toggle_breakpoint()
-end, { desc = "Toggle Breakpoint" })
-map("n", "<leader>ds", function()
-  require("dap").continue()
-end, { desc = "Start / Continue" })
-map("n", "<leader>dn", function()
-  require("dap").step_over()
-end, { desc = "Step Over" })
-map("n", "<leader>di", function()
-  require("dap").step_into()
-end, { desc = "Step Into" })
-map("n", "<leader>do", function()
-  require("dap").step_out()
-end, { desc = "Step Out" })
-map("n", "<leader>dq", function()
-  require("dap").terminate()
-end, { desc = "Terminate Debugging" })
+-- Debug (requires DAP plugins - commented out in plugins/init.lua)
+-- map("n", "<leader>du", function()
+--   require("dapui").toggle()
+-- end, { desc = "Toggle Debug UI" })
+-- map("n", "<leader>db", function()
+--   require("dap").toggle_breakpoint()
+-- end, { desc = "Toggle Breakpoint" })
+-- map("n", "<leader>ds", function()
+--   require("dap").continue()
+-- end, { desc = "Start / Continue" })
+-- map("n", "<leader>dn", function()
+--   require("dap").step_over()
+-- end, { desc = "Step Over" })
+-- map("n", "<leader>di", function()
+--   require("dap").step_into()
+-- end, { desc = "Step Into" })
+-- map("n", "<leader>do", function()
+--   require("dap").step_out()
+-- end, { desc = "Step Out" })
+-- map("n", "<leader>dq", function()
+--   require("dap").terminate()
+-- end, { desc = "Terminate Debugging" })
 
 -- ===============================
 -- Dadbod (database UI)

@@ -25,41 +25,41 @@ local lspconfig = require "lspconfig"
 -------------------------------------------------------------
 -- CLANGD (C/C++)
 -------------------------------------------------------------
-lspconfig.clangd.setup {
-  on_attach = function(client, bufnr)
-    client.server_capabilities.signatureHelpProvider = false
-    on_attach(client, bufnr)
-  end,
-  capabilities = capabilities,
-}
+-- lspconfig.clangd.setup {
+--   on_attach = function(client, bufnr)
+--     client.server_capabilities.signatureHelpProvider = false
+--     on_attach(client, bufnr)
+--   end,
+--   capabilities = capabilities,
+-- }
 
 -------------------------------------------------------------
 -- PYRIGHT (Python)
 -------------------------------------------------------------
-lspconfig.pyright.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+-- lspconfig.pyright.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+-- }
 
 -------------------------------------------------------------
 -- GOPLS (Go)
 -------------------------------------------------------------
-lspconfig.gopls.setup {
-  on_attach = function(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-    on_attach(client, bufnr)
-  end,
-  capabilities = capabilities,
-  settings = {
-    gopls = {
-      analyses = { unusedparams = true },
-      completeUnimported = true,
-      usePlaceholders = true,
-      staticcheck = true,
-    },
-  },
-}
+-- lspconfig.gopls.setup {
+--   on_attach = function(client, bufnr)
+--     client.server_capabilities.documentFormattingProvider = false
+--     client.server_capabilities.documentRangeFormattingProvider = false
+--     on_attach(client, bufnr)
+--   end,
+--   capabilities = capabilities,
+--   settings = {
+--     gopls = {
+--       analyses = { unusedparams = true },
+--       completeUnimported = true,
+--       usePlaceholders = true,
+--       staticcheck = true,
+--     },
+--   },
+-- }
 
 -------------------------------------------------------------
 -- POSTGRES_LSP (SQL / PostgreSQL)
